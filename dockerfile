@@ -12,6 +12,7 @@ ARG DISTRO_IMG=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspi
 ARG BUILD_DIR=/build/
 ARG BASE_DIR=/base/
 ARG APP_DIR=/app/
+ARG DISK_SIZE=8G
 
 ARG IMAGE_FILE_NAME=distro.qcow2
 ARG KERNEL_FILE_NAME=kernel.img
@@ -70,7 +71,7 @@ RUN rm /mnt/root/usr/lib/systemd/system/userconfig.service \
  # Create new distro image from modified boot and root
 ARG BUILD_DIR
 RUN mkdir $BUILD_DIR
-RUN guestfish -N $BUILD_DIR/distro.img=bootroot:vfat:ext4:10G \
+RUN guestfish -N $BUILD_DIR/distro.img=bootroot:vfat:ext4:${DISK_SIZE} \
  && guestfish add $BUILD_DIR/distro.img : run : mount /dev/sda1 / : glob copy-in /mnt/boot/* / : umount / : mount /dev/sda2 / : glob copy-in /mnt/root/* / \
  && sfdisk --part-type $BUILD_DIR/distro.img 1 c
 
