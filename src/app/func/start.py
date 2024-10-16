@@ -36,6 +36,8 @@ def start(opts):
   run_dir = opts.DIST_DIR if has_volume else opts.BASE_DIR
   image_path = f'{run_dir}/{opts.IMAGE_FILE_NAME}'
   kernel_path = f'{run_dir}/{opts.KERNEL_FILE_NAME}'
+  machine = f'{opts.MACHINE}'
+  cpu = f'{opts.cpu}'
 
   # Start emulator
   log.info("Starting the emulator ...")
