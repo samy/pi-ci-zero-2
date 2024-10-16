@@ -36,8 +36,11 @@ def start(opts):
   run_dir = opts.DIST_DIR if has_volume else opts.BASE_DIR
   image_path = f'{run_dir}/{opts.IMAGE_FILE_NAME}'
   kernel_path = f'{run_dir}/{opts.KERNEL_FILE_NAME}'
+  
+  # Define emulated device details
   machine = f'{opts.MACHINE}'
-  cpu = f'{opts.cpu}'
+  cpu = f'{opts.CPU}'
+  memory = f'{opts.MEMORY}'
 
   # Start emulator
   log.info("Starting the emulator ...")
@@ -68,5 +71,6 @@ def start_parser(parsers, parent_parser, get_usage, env):
   parser.add_argument('--image', dest='image_path', type=str, help=f"image file (default: {env.IMAGE_FILE_NAME})", default=env.IMAGE_FILE_NAME)
   parser.add_argument('--cpu', dest='cpu', type=str, help=f"image file (default: {env.CPU})", default=env.CPU)
   parser.add_argument('--machine', dest='machine', type=str, help=f"machine (default: {env.MACHINE})", default=env.MACHINE)
+  parser.add_argument('--memory', dest='memory', type=str, help=f"machine (default: {env.MEMORY})", default=env.MEMORY)
 
   parser.set_defaults(func=lambda *args: start(*args))
