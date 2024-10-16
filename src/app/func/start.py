@@ -41,8 +41,7 @@ def start(opts):
   log.info("Starting the emulator ...")
   run(f"""
     qemu-system-aarch64 \
-    -machine raspi3ap \
-    -cpu cortex-a53 \
+    -machine {machine} \
     -m 2G \
     -smp 4 \
     -kernel {kernel_path} \
@@ -64,5 +63,6 @@ def start_parser(parsers, parent_parser, get_usage, env):
   parser = parsers.add_parser("start", description=description, parents=[parent_parser], usage=get_usage('start'))
   parser.add_argument('-p', dest='port', type=int, help=f"port number (default: {env.PORT})", default=env.PORT)
   parser.add_argument('--image', dest='image_path', type=str, help=f"image file (default: {env.IMAGE_FILE_NAME})", default=env.IMAGE_FILE_NAME)
+  parser.add_argument('--machine', dest='machine', type=str, help=f"machine (default: {env.MACHINE})", default=env.MACHINE)
 
   parser.set_defaults(func=lambda *args: start(*args))
