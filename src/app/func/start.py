@@ -42,8 +42,8 @@ def start(opts):
   run(f"""
     qemu-system-aarch64 \
     -machine virt \
-    -cpu cortex-a72 \
-    -m 2G \
+    -cpu cortex-a53 \
+    -m 10G \
     -smp 4 \
     -kernel {kernel_path} \
     -append \"rw console=ttyAMA0 root=/dev/vda2 rootfstype=ext4 rootdelay=1 loglevel=2\" \
