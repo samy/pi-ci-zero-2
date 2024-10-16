@@ -41,7 +41,7 @@ def start(opts):
   log.info("Starting the emulator ...")
   run(f"""
     qemu-system-aarch64 \
-    -machine virt \
+    -machine raspi3ap \
     -cpu cortex-a53 \
     -m 2G \
     -smp 4 \
